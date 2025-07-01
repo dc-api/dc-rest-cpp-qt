@@ -1,0 +1,27 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+    - name: Configure CMake
+      # Creates a build directory and configures the project using CMake.
+      run: cmake -B build -S ./client
+    - name: Build
+      # Compiles the project based on the CMake configuration.
+      run: cmake --build build
+    # - name: Test
+    #   # Executes tests using CTest. Assumes tests are enabled in CMakeLists.txt.
+    #   working-directory: build
+    #   run: ctest --output-on-failure

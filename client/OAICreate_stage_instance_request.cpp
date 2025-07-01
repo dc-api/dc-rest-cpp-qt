@@ -1,0 +1,254 @@
+/**
+ * Discord HTTP API (Preview) - REST API Client
+ * Preview of the Discord v10 HTTP API specification. See https://discord.com/developers/docs for more details.
+ * 
+ * ## Metadata
+ *   
+ * - **Copyright**: Copyright (c) 2025 Qntx
+ * - **Author**: ΣX <gitctrlx@gmail.com>
+ * - **Version**: 10
+ * - **Modified**: 2025-07-01T06:33:49.033017897Z[Etc/UTC]
+ * - **Generator Version**: 7.14.0
+ *
+ * <details>
+ * <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
+ * <br>
+ * > **IMPORTANT**: This software is provided "as is" without any warranties, express or implied, including but not limited
+ * > to warranties of merchantability, fitness for a particular purpose, or non-infringement. The developers, contributors,
+ * > and licensors (collectively, "Developers") make no representations regarding the accuracy, completeness, or reliability
+ * > of this software or its outputs.
+ * >
+ * > This client is not intended to provide financial, investment, tax, or legal advice. It facilitates interaction with the
+ * > Discord HTTP API (Preview) service but does not endorse or recommend any financial actions, including the purchase, sale, or holding of
+ * > financial instruments (e.g., stocks, bonds, derivatives, cryptocurrencies). Users must consult qualified financial or
+ * > legal professionals before making decisions based on this software's outputs.
+ * >
+ * > Financial markets are inherently speculative and carry significant risks. Using this software in trading, analysis, or
+ * > other financial activities may result in substantial losses, including total loss of capital. The Developers are not
+ * > liable for any losses or damages arising from such use. Users assume full responsibility for validating the software's
+ * > outputs and ensuring their suitability for intended purposes.
+ * >
+ * > This client may rely on third-party data or services (e.g., market feeds, APIs). The Developers do not control or verify
+ * > the accuracy of these services and are not liable for any errors, delays, or losses resulting from their use. Users must
+ * > comply with third-party terms and conditions.
+ * >
+ * > Users are solely responsible for ensuring compliance with all applicable financial, tax, and regulatory requirements in
+ * > their jurisdiction. This includes obtaining necessary licenses or approvals for trading or investment activities. The
+ * > Developers disclaim liability for any legal consequences arising from non-compliance.
+ * >
+ * > To the fullest extent permitted by law, the Developers shall not be liable for any direct, indirect, incidental,
+ * > consequential, or punitive damages arising from the use or inability to use this software, including but not limited to
+ * > loss of profits, data, or business opportunities.
+ *
+ * </details>
+ */
+
+#include "OAICreate_stage_instance_request.h"
+
+#include <QDebug>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QObject>
+
+#include "OAIHelpers.h"
+
+namespace dc_rest {
+
+OAICreate_stage_instance_request::OAICreate_stage_instance_request(QString json) {
+    this->initializeModel();
+    this->fromJson(json);
+}
+
+OAICreate_stage_instance_request::OAICreate_stage_instance_request() {
+    this->initializeModel();
+}
+
+OAICreate_stage_instance_request::~OAICreate_stage_instance_request() {}
+
+void OAICreate_stage_instance_request::initializeModel() {
+
+    m_topic_isSet = false;
+    m_topic_isValid = false;
+
+    m_channel_id_isSet = false;
+    m_channel_id_isValid = false;
+
+    m_privacy_level_isSet = false;
+    m_privacy_level_isValid = false;
+
+    m_guild_scheduled_event_id_isSet = false;
+    m_guild_scheduled_event_id_isValid = false;
+
+    m_send_start_notification_isSet = false;
+    m_send_start_notification_isValid = false;
+}
+
+void OAICreate_stage_instance_request::fromJson(QString jsonString) {
+    QByteArray array(jsonString.toStdString().c_str());
+    QJsonDocument doc = QJsonDocument::fromJson(array);
+    QJsonObject jsonObject = doc.object();
+    this->fromJsonObject(jsonObject);
+}
+
+void OAICreate_stage_instance_request::fromJsonObject(QJsonObject json) {
+
+    m_topic_isValid = ::dc_rest::fromJsonValue(m_topic, json[QString("topic")]);
+    m_topic_isSet = !json[QString("topic")].isNull() && m_topic_isValid;
+
+    m_channel_id_isValid = ::dc_rest::fromJsonValue(m_channel_id, json[QString("channel_id")]);
+    m_channel_id_isSet = !json[QString("channel_id")].isNull() && m_channel_id_isValid;
+
+    m_privacy_level_isValid = ::dc_rest::fromJsonValue(m_privacy_level, json[QString("privacy_level")]);
+    m_privacy_level_isSet = !json[QString("privacy_level")].isNull() && m_privacy_level_isValid;
+
+    m_guild_scheduled_event_id_isValid = ::dc_rest::fromJsonValue(m_guild_scheduled_event_id, json[QString("guild_scheduled_event_id")]);
+    m_guild_scheduled_event_id_isSet = !json[QString("guild_scheduled_event_id")].isNull() && m_guild_scheduled_event_id_isValid;
+
+    m_send_start_notification_isValid = ::dc_rest::fromJsonValue(m_send_start_notification, json[QString("send_start_notification")]);
+    m_send_start_notification_isSet = !json[QString("send_start_notification")].isNull() && m_send_start_notification_isValid;
+}
+
+QString OAICreate_stage_instance_request::asJson() const {
+    QJsonObject obj = this->asJsonObject();
+    QJsonDocument doc(obj);
+    QByteArray bytes = doc.toJson();
+    return QString(bytes);
+}
+
+QJsonObject OAICreate_stage_instance_request::asJsonObject() const {
+    QJsonObject obj;
+    if (m_topic_isSet) {
+        obj.insert(QString("topic"), ::dc_rest::toJsonValue(m_topic));
+    }
+    if (m_channel_id_isSet) {
+        obj.insert(QString("channel_id"), ::dc_rest::toJsonValue(m_channel_id));
+    }
+    if (m_privacy_level_isSet) {
+        obj.insert(QString("privacy_level"), ::dc_rest::toJsonValue(m_privacy_level));
+    }
+    if (m_guild_scheduled_event_id_isSet) {
+        obj.insert(QString("guild_scheduled_event_id"), ::dc_rest::toJsonValue(m_guild_scheduled_event_id));
+    }
+    if (m_send_start_notification_isSet) {
+        obj.insert(QString("send_start_notification"), ::dc_rest::toJsonValue(m_send_start_notification));
+    }
+    return obj;
+}
+
+QString OAICreate_stage_instance_request::getTopic() const {
+    return m_topic;
+}
+void OAICreate_stage_instance_request::setTopic(const QString &topic) {
+    m_topic = topic;
+    m_topic_isSet = true;
+}
+
+bool OAICreate_stage_instance_request::is_topic_Set() const{
+    return m_topic_isSet;
+}
+
+bool OAICreate_stage_instance_request::is_topic_Valid() const{
+    return m_topic_isValid;
+}
+
+QString OAICreate_stage_instance_request::getChannelId() const {
+    return m_channel_id;
+}
+void OAICreate_stage_instance_request::setChannelId(const QString &channel_id) {
+    m_channel_id = channel_id;
+    m_channel_id_isSet = true;
+}
+
+bool OAICreate_stage_instance_request::is_channel_id_Set() const{
+    return m_channel_id_isSet;
+}
+
+bool OAICreate_stage_instance_request::is_channel_id_Valid() const{
+    return m_channel_id_isValid;
+}
+
+qint32 OAICreate_stage_instance_request::getPrivacyLevel() const {
+    return m_privacy_level;
+}
+void OAICreate_stage_instance_request::setPrivacyLevel(const qint32 &privacy_level) {
+    m_privacy_level = privacy_level;
+    m_privacy_level_isSet = true;
+}
+
+bool OAICreate_stage_instance_request::is_privacy_level_Set() const{
+    return m_privacy_level_isSet;
+}
+
+bool OAICreate_stage_instance_request::is_privacy_level_Valid() const{
+    return m_privacy_level_isValid;
+}
+
+QString OAICreate_stage_instance_request::getGuildScheduledEventId() const {
+    return m_guild_scheduled_event_id;
+}
+void OAICreate_stage_instance_request::setGuildScheduledEventId(const QString &guild_scheduled_event_id) {
+    m_guild_scheduled_event_id = guild_scheduled_event_id;
+    m_guild_scheduled_event_id_isSet = true;
+}
+
+bool OAICreate_stage_instance_request::is_guild_scheduled_event_id_Set() const{
+    return m_guild_scheduled_event_id_isSet;
+}
+
+bool OAICreate_stage_instance_request::is_guild_scheduled_event_id_Valid() const{
+    return m_guild_scheduled_event_id_isValid;
+}
+
+bool OAICreate_stage_instance_request::isSendStartNotification() const {
+    return m_send_start_notification;
+}
+void OAICreate_stage_instance_request::setSendStartNotification(const bool &send_start_notification) {
+    m_send_start_notification = send_start_notification;
+    m_send_start_notification_isSet = true;
+}
+
+bool OAICreate_stage_instance_request::is_send_start_notification_Set() const{
+    return m_send_start_notification_isSet;
+}
+
+bool OAICreate_stage_instance_request::is_send_start_notification_Valid() const{
+    return m_send_start_notification_isValid;
+}
+
+bool OAICreate_stage_instance_request::isSet() const {
+    bool isObjectUpdated = false;
+    do {
+        if (m_topic_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_channel_id_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_privacy_level_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_guild_scheduled_event_id_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_send_start_notification_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+    } while (false);
+    return isObjectUpdated;
+}
+
+bool OAICreate_stage_instance_request::isValid() const {
+    // only required properties are required for the object to be considered valid
+    return m_topic_isValid && m_channel_id_isValid && true;
+}
+
+} // namespace dc_rest
