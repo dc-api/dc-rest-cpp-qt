@@ -1,0 +1,164 @@
+/**
+ * Discord HTTP API (Preview) - REST API Client
+ * Preview of the Discord v10 HTTP API specification. See https://discord.com/developers/docs for more details.
+ * 
+ * ## Metadata
+ *   
+ * - **Copyright**: Copyright (c) 2025 Qntx
+ * - **Author**: ΣX <gitctrlx@gmail.com>
+ * - **Version**: 10
+ * - **Modified**: 2025-07-01T06:33:49.033017897Z[Etc/UTC]
+ * - **Generator Version**: 7.14.0
+ *
+ * <details>
+ * <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
+ * <br>
+ * > **IMPORTANT**: This software is provided "as is" without any warranties, express or implied, including but not limited
+ * > to warranties of merchantability, fitness for a particular purpose, or non-infringement. The developers, contributors,
+ * > and licensors (collectively, "Developers") make no representations regarding the accuracy, completeness, or reliability
+ * > of this software or its outputs.
+ * >
+ * > This client is not intended to provide financial, investment, tax, or legal advice. It facilitates interaction with the
+ * > Discord HTTP API (Preview) service but does not endorse or recommend any financial actions, including the purchase, sale, or holding of
+ * > financial instruments (e.g., stocks, bonds, derivatives, cryptocurrencies). Users must consult qualified financial or
+ * > legal professionals before making decisions based on this software's outputs.
+ * >
+ * > Financial markets are inherently speculative and carry significant risks. Using this software in trading, analysis, or
+ * > other financial activities may result in substantial losses, including total loss of capital. The Developers are not
+ * > liable for any losses or damages arising from such use. Users assume full responsibility for validating the software's
+ * > outputs and ensuring their suitability for intended purposes.
+ * >
+ * > This client may rely on third-party data or services (e.g., market feeds, APIs). The Developers do not control or verify
+ * > the accuracy of these services and are not liable for any errors, delays, or losses resulting from their use. Users must
+ * > comply with third-party terms and conditions.
+ * >
+ * > Users are solely responsible for ensuring compliance with all applicable financial, tax, and regulatory requirements in
+ * > their jurisdiction. This includes obtaining necessary licenses or approvals for trading or investment activities. The
+ * > Developers disclaim liability for any legal consequences arising from non-compliance.
+ * >
+ * > To the fullest extent permitted by law, the Developers shall not be liable for any direct, indirect, incidental,
+ * > consequential, or punitive damages arising from the use or inability to use this software, including but not limited to
+ * > loss of profits, data, or business opportunities.
+ *
+ * </details>
+ */
+
+#include "OAIApplicationOAuth2InstallParamsResponse.h"
+
+#include <QDebug>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QObject>
+
+#include "OAIHelpers.h"
+
+namespace dc_rest {
+
+OAIApplicationOAuth2InstallParamsResponse::OAIApplicationOAuth2InstallParamsResponse(QString json) {
+    this->initializeModel();
+    this->fromJson(json);
+}
+
+OAIApplicationOAuth2InstallParamsResponse::OAIApplicationOAuth2InstallParamsResponse() {
+    this->initializeModel();
+}
+
+OAIApplicationOAuth2InstallParamsResponse::~OAIApplicationOAuth2InstallParamsResponse() {}
+
+void OAIApplicationOAuth2InstallParamsResponse::initializeModel() {
+
+    m_scopes_isSet = false;
+    m_scopes_isValid = false;
+
+    m_permissions_isSet = false;
+    m_permissions_isValid = false;
+}
+
+void OAIApplicationOAuth2InstallParamsResponse::fromJson(QString jsonString) {
+    QByteArray array(jsonString.toStdString().c_str());
+    QJsonDocument doc = QJsonDocument::fromJson(array);
+    QJsonObject jsonObject = doc.object();
+    this->fromJsonObject(jsonObject);
+}
+
+void OAIApplicationOAuth2InstallParamsResponse::fromJsonObject(QJsonObject json) {
+
+    m_scopes_isValid = ::dc_rest::fromJsonValue(m_scopes, json[QString("scopes")]);
+    m_scopes_isSet = !json[QString("scopes")].isNull() && m_scopes_isValid;
+
+    m_permissions_isValid = ::dc_rest::fromJsonValue(m_permissions, json[QString("permissions")]);
+    m_permissions_isSet = !json[QString("permissions")].isNull() && m_permissions_isValid;
+}
+
+QString OAIApplicationOAuth2InstallParamsResponse::asJson() const {
+    QJsonObject obj = this->asJsonObject();
+    QJsonDocument doc(obj);
+    QByteArray bytes = doc.toJson();
+    return QString(bytes);
+}
+
+QJsonObject OAIApplicationOAuth2InstallParamsResponse::asJsonObject() const {
+    QJsonObject obj;
+    if (m_scopes.size() > 0) {
+        obj.insert(QString("scopes"), ::dc_rest::toJsonValue(m_scopes));
+    }
+    if (m_permissions_isSet) {
+        obj.insert(QString("permissions"), ::dc_rest::toJsonValue(m_permissions));
+    }
+    return obj;
+}
+
+QSet<QString> OAIApplicationOAuth2InstallParamsResponse::getScopes() const {
+    return m_scopes;
+}
+void OAIApplicationOAuth2InstallParamsResponse::setScopes(const QSet<QString> &scopes) {
+    m_scopes = scopes;
+    m_scopes_isSet = true;
+}
+
+bool OAIApplicationOAuth2InstallParamsResponse::is_scopes_Set() const{
+    return m_scopes_isSet;
+}
+
+bool OAIApplicationOAuth2InstallParamsResponse::is_scopes_Valid() const{
+    return m_scopes_isValid;
+}
+
+QString OAIApplicationOAuth2InstallParamsResponse::getPermissions() const {
+    return m_permissions;
+}
+void OAIApplicationOAuth2InstallParamsResponse::setPermissions(const QString &permissions) {
+    m_permissions = permissions;
+    m_permissions_isSet = true;
+}
+
+bool OAIApplicationOAuth2InstallParamsResponse::is_permissions_Set() const{
+    return m_permissions_isSet;
+}
+
+bool OAIApplicationOAuth2InstallParamsResponse::is_permissions_Valid() const{
+    return m_permissions_isValid;
+}
+
+bool OAIApplicationOAuth2InstallParamsResponse::isSet() const {
+    bool isObjectUpdated = false;
+    do {
+        if (m_scopes.size() > 0) {
+            isObjectUpdated = true;
+            break;
+        }
+
+        if (m_permissions_isSet) {
+            isObjectUpdated = true;
+            break;
+        }
+    } while (false);
+    return isObjectUpdated;
+}
+
+bool OAIApplicationOAuth2InstallParamsResponse::isValid() const {
+    // only required properties are required for the object to be considered valid
+    return m_scopes_isValid && m_permissions_isValid && true;
+}
+
+} // namespace dc_rest
